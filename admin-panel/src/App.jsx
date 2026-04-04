@@ -50,12 +50,12 @@ const darkTheme = createTheme({
     palette: {
         mode: 'dark',
         primary: {
-            main: '#7C3AED',
-            light: '#A78BFA',
-            dark: '#5B21B6',
+            main: '#8B5CF6', // Vibrant Violet
+            light: '#C4B5FD',
+            dark: '#6D28D9',
         },
         secondary: {
-            main: '#06B6D4',
+            main: '#06B6D4', // Cyan
             light: '#67E8F9',
         },
         success: {
@@ -68,46 +68,52 @@ const darkTheme = createTheme({
             main: '#EF4444',
         },
         background: {
-            default: '#0F0F1A',
-            paper: '#161627',
+            default: '#0B0B14', // Deepest dark
+            paper: '#121221',    // Slightly lighter dark
         },
         text: {
-            primary: '#F1F5F9',
+            primary: '#F8FAFC',
             secondary: '#94A3B8',
         },
     },
     typography: {
-        fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
-        h4: { fontWeight: 700 },
-        h5: { fontWeight: 600 },
-        h6: { fontWeight: 600 },
+        fontFamily: '"Outfit", "Inter", sans-serif',
+        h4: { fontWeight: 800, letterSpacing: '-0.02em' },
+        h5: { fontWeight: 700, letterSpacing: '-0.01em' },
+        h6: { fontWeight: 700 },
+        subtitle1: { fontWeight: 600 },
     },
     shape: {
-        borderRadius: 12,
+        borderRadius: 16,
     },
     components: {
         MuiPaper: {
             styleOverrides: {
                 root: {
                     backgroundImage: 'none',
-                    border: '1px solid rgba(255,255,255,0.06)',
+                    backgroundColor: 'rgba(22, 22, 39, 0.7)',
+                    backdropFilter: 'blur(16px)',
+                    border: '1px solid rgba(255, 255, 255, 0.08)',
+                    boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.4)',
                 },
             },
         },
         MuiButton: {
             styleOverrides: {
                 root: {
-                    borderRadius: 8,
+                    borderRadius: 10,
                     textTransform: 'none',
                     fontWeight: 600,
+                    padding: '10px 20px',
                 },
             },
         },
         MuiChip: {
             styleOverrides: {
                 root: {
-                    borderRadius: 6,
-                    fontWeight: 600,
+                    borderRadius: 8,
+                    fontWeight: 700,
+                    fontSize: '0.75rem',
                 },
             },
         },
@@ -176,11 +182,11 @@ function Navigation({ children }) {
                     </Box>
                     {!collapsed && (
                         <Box>
-                            <Typography variant="subtitle1" sx={{ color: 'white', fontWeight: 700, lineHeight: 1.2, fontSize: '0.9rem' }}>
-                                QGroundControl
+                            <Typography variant="subtitle1" sx={{ color: 'white', fontWeight: 800, lineHeight: 1.1, fontSize: '0.95rem' }}>
+                                Main QGC
                             </Typography>
-                            <Typography variant="caption" sx={{ color: '#7C3AED', fontWeight: 600, letterSpacing: '0.08em' }}>
-                                ADMIN PANEL
+                            <Typography variant="caption" sx={{ color: 'primary.main', fontWeight: 700, fontSize: '0.65rem', letterSpacing: '0.05em' }}>
+                                AGRI-MAPPING-CAMERA
                             </Typography>
                         </Box>
                     )}
@@ -334,10 +340,10 @@ function Navigation({ children }) {
                     <Toolbar sx={{ gap: 1 }}>
                         <Box sx={{ flex: 1 }}>
                             <Typography variant="h6" sx={{ fontWeight: 700, color: 'white', fontSize: '1rem' }}>
-                                {currentMenuItem.text}
+                                Main QGC Admin Dashboard
                             </Typography>
-                            <Typography variant="caption" sx={{ color: 'text.secondary' }}>
-                                QGroundControl Admin Dashboard
+                            <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 500 }}>
+                                Agri-Mapping-Camera Management System
                             </Typography>
                         </Box>
                         <Chip

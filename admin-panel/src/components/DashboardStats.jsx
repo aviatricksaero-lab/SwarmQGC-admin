@@ -49,55 +49,62 @@ const API_URL = import.meta.env.VITE_API_URL;
 const StatCard = ({ title, value, icon, color, subtitle, loading }) => (
     <Card sx={{
         height: '100%',
-        background: `linear-gradient(135deg, ${alpha(color, 0.12)} 0%, ${alpha(color, 0.04)} 100%)`,
-        border: `1px solid ${alpha(color, 0.2)}`,
+        background: `linear-gradient(135deg, ${alpha(color, 0.1)} 0%, ${alpha(color, 0.02)} 100%)`,
+        backdropFilter: 'blur(10px)',
+        border: `1px solid ${alpha(color, 0.15)}`,
         position: 'relative',
         overflow: 'hidden',
-        transition: 'transform 0.2s, box-shadow 0.2s',
+        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
         '&:hover': {
-            transform: 'translateY(-3px)',
-            boxShadow: `0 12px 35px ${alpha(color, 0.2)}`,
+            transform: 'translateY(-5px)',
+            boxShadow: `0 15px 35px -10px ${alpha(color, 0.3)}`,
+            border: `1px solid ${alpha(color, 0.3)}`,
+            '& .card-icon-container': {
+                transform: 'scale(1.1) rotate(5deg)',
+                boxShadow: `0 8px 25px ${alpha(color, 0.5)}`,
+            }
         }
     }}>
-        {/* Glow orb */}
+        {/* Decorative elements */}
         <Box sx={{
             position: 'absolute',
-            top: -30, right: -30,
-            width: 100, height: 100,
+            top: -20, right: -20,
+            width: 120, height: 120,
             borderRadius: '50%',
-            background: `radial-gradient(circle, ${alpha(color, 0.25)}, transparent 70%)`,
+            background: `radial-gradient(circle, ${alpha(color, 0.15)}, transparent 70%)`,
             pointerEvents: 'none',
         }} />
         <CardContent sx={{ p: 3 }}>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                <Box sx={{ flex: 1 }}>
-                    <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', fontSize: '0.7rem' }}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <Box>
+                    <Typography variant="overline" sx={{ color: 'text.secondary', fontWeight: 700, letterSpacing: '0.1em', fontSize: '0.65rem' }}>
                         {title}
                     </Typography>
                     {loading ? (
                         <Skeleton variant="text" width={80} height={50} sx={{ bgcolor: alpha(color, 0.1) }} />
                     ) : (
-                        <Typography variant="h3" sx={{ fontWeight: 800, color: 'white', lineHeight: 1.1, mt: 0.5 }}>
+                        <Typography variant="h3" sx={{ fontWeight: 800, color: 'white', lineHeight: 1.1, my: 0.5 }}>
                             {value}
                         </Typography>
                     )}
                     {subtitle && (
-                        <Typography variant="caption" sx={{ color: alpha(color, 0.8), fontWeight: 500, mt: 0.5, display: 'block' }}>
+                        <Typography variant="caption" sx={{ color: alpha('#94A3B8', 0.8), fontWeight: 500, display: 'block' }}>
                             {subtitle}
                         </Typography>
                     )}
                 </Box>
-                <Box sx={{
-                    width: 52, height: 52,
-                    borderRadius: '14px',
-                    background: `linear-gradient(135deg, ${color}, ${alpha(color, 0.7)})`,
+                <Box className="card-icon-container" sx={{
+                    width: 56, height: 56,
+                    borderRadius: '16px',
+                    background: `linear-gradient(135deg, ${color}, ${alpha(color, 0.6)})`,
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    boxShadow: `0 6px 20px ${alpha(color, 0.4)}`,
+                    boxShadow: `0 6px 20px ${alpha(color, 0.3)}`,
+                    transition: 'all 0.3s ease',
                     flexShrink: 0,
                 }}>
-                    {React.cloneElement(icon, { sx: { color: 'white', fontSize: 26 } })}
+                    {React.cloneElement(icon, { sx: { color: 'white', fontSize: 28 } })}
                 </Box>
             </Box>
         </CardContent>
@@ -226,40 +233,50 @@ const DashboardStats = () => {
             <Grid container spacing={3} sx={{ mb: 4 }}>
                 {/* Growth Chart */}
                 <Grid item xs={12} lg={8}>
-                    <Paper sx={{ p: 3, height: 320, background: 'rgba(22,22,39,0.8)' }}>
-                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2.5 }}>
-                            <TrendingUpIcon sx={{ color: '#7C3AED', fontSize: 20 }} />
-                            <Typography variant="subtitle1" sx={{ fontWeight: 700, color: 'white' }}>
-                                Growth Overview
-                            </Typography>
-                            <Typography variant="caption" sx={{ color: 'text.secondary', ml: 0.5 }}>
-                                (last 6 months)
-                            </Typography>
+                    <Paper sx={{ p: 3, height: 360, background: 'rgba(22,22,39,0.6)', border: '1px solid rgba(255,255,255,0.08)' }}>
+                        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 3 }}>
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+                                <Box sx={{ p: 1, borderRadius: '10px', background: alpha('#8B5CF6', 0.15) }}>
+                                    <TrendingUpIcon sx={{ color: '#8B5CF6', fontSize: 20, display: 'block' }} />
+                                </Box>
+                                <Box>
+                                    <Typography variant="subtitle1" sx={{ fontWeight: 700, color: 'white', lineHeight: 1.2 }}>
+                                        Growth Analytics
+                                    </Typography>
+                                    <Typography variant="caption" sx={{ color: 'text.secondary' }}>
+                                        User & Session trends (last 6 months)
+                                    </Typography>
+                                </Box>
+                            </Box>
                         </Box>
                         {loading ? (
-                            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 220 }}>
-                                <CircularProgress size={40} sx={{ color: '#7C3AED' }} />
+                            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 240 }}>
+                                <CircularProgress size={40} sx={{ color: '#8B5CF6' }} />
                             </Box>
                         ) : (
-                            <ResponsiveContainer width="100%" height={230}>
+                            <ResponsiveContainer width="100%" height={260}>
                                 <AreaChart data={chartData} margin={{ top: 5, right: 20, left: -10, bottom: 5 }}>
                                     <defs>
                                         <linearGradient id="gradUsers" x1="0" y1="0" x2="0" y2="1">
-                                            <stop offset="5%" stopColor="#7C3AED" stopOpacity={0.4} />
-                                            <stop offset="95%" stopColor="#7C3AED" stopOpacity={0} />
+                                            <stop offset="5%" stopColor="#8B5CF6" stopOpacity={0.4} />
+                                            <stop offset="95%" stopColor="#8B5CF6" stopOpacity={0} />
                                         </linearGradient>
                                         <linearGradient id="gradSessions" x1="0" y1="0" x2="0" y2="1">
                                             <stop offset="5%" stopColor="#10B981" stopOpacity={0.4} />
                                             <stop offset="95%" stopColor="#10B981" stopOpacity={0} />
                                         </linearGradient>
                                     </defs>
-                                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
-                                    <XAxis dataKey="month" tick={{ fill: '#94A3B8', fontSize: 11 }} axisLine={false} tickLine={false} />
-                                    <YAxis tick={{ fill: '#94A3B8', fontSize: 11 }} axisLine={false} tickLine={false} />
+                                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.03)" vertical={false} />
+                                    <XAxis dataKey="month" tick={{ fill: '#64748B', fontSize: 11, fontWeight: 600 }} axisLine={false} tickLine={false} dy={10} />
+                                    <YAxis tick={{ fill: '#64748B', fontSize: 11, fontWeight: 600 }} axisLine={false} tickLine={false} />
                                     <Tooltip content={<CustomTooltip />} />
-                                    <Legend wrapperStyle={{ paddingTop: 10, fontSize: 12 }} />
-                                    <Area type="monotone" dataKey="users" name="New Users" stroke="#7C3AED" strokeWidth={2.5} fill="url(#gradUsers)" dot={{ fill: '#7C3AED', r: 4 }} />
-                                    <Area type="monotone" dataKey="sessions" name="Sessions" stroke="#10B981" strokeWidth={2.5} fill="url(#gradSessions)" dot={{ fill: '#10B981', r: 4 }} />
+                                    <Legend 
+                                        wrapperStyle={{ paddingTop: 20, fontSize: 12, fontWeight: 600 }} 
+                                        iconType="circle"
+                                        formatter={(v) => <span style={{ color: '#94A3B8' }}>{v}</span>}
+                                    />
+                                    <Area type="monotone" dataKey="users" name="New Users" stroke="#8B5CF6" strokeWidth={3} fill="url(#gradUsers)" dot={{ fill: '#8B5CF6', r: 4, strokeWidth: 2, stroke: '#0B0B14' }} activeDot={{ r: 6, strokeWidth: 0 }} />
+                                    <Area type="monotone" dataKey="sessions" name="Sessions" stroke="#10B981" strokeWidth={3} fill="url(#gradSessions)" dot={{ fill: '#10B981', r: 4, strokeWidth: 2, stroke: '#0B0B14' }} activeDot={{ r: 6, strokeWidth: 0 }} />
                                 </AreaChart>
                             </ResponsiveContainer>
                         )}
@@ -268,31 +285,41 @@ const DashboardStats = () => {
 
                 {/* Zone Distribution Pie */}
                 <Grid item xs={12} lg={4}>
-                    <Paper sx={{ p: 3, height: 320, background: 'rgba(22,22,39,0.8)' }}>
-                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2.5 }}>
-                            <MapIcon sx={{ color: '#EF4444', fontSize: 20 }} />
-                            <Typography variant="subtitle1" sx={{ fontWeight: 700, color: 'white' }}>
-                                Zone Distribution
-                            </Typography>
+                    <Paper sx={{ p: 3, height: 360, background: 'rgba(22,22,39,0.6)', border: '1px solid rgba(255,255,255,0.08)' }}>
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 3 }}>
+                            <Box sx={{ p: 1, borderRadius: '10px', background: alpha('#EF4444', 0.15) }}>
+                                <MapIcon sx={{ color: '#EF4444', fontSize: 20, display: 'block' }} />
+                            </Box>
+                            <Box>
+                                <Typography variant="subtitle1" sx={{ fontWeight: 700, color: 'white', lineHeight: 1.2 }}>
+                                    Zone Distribution
+                                </Typography>
+                                <Typography variant="caption" sx={{ color: 'text.secondary' }}>
+                                    Airspace facility types
+                                </Typography>
+                            </Box>
                         </Box>
                         {loading ? (
-                            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 220 }}>
+                            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 240 }}>
                                 <CircularProgress size={40} sx={{ color: '#EF4444' }} />
                             </Box>
                         ) : zoneData.length === 0 ? (
-                            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 220 }}>
+                            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 240 }}>
                                 <Typography variant="body2" sx={{ color: 'text.secondary' }}>No airspace data</Typography>
                             </Box>
                         ) : (
-                            <ResponsiveContainer width="100%" height={230}>
+                            <ResponsiveContainer width="100%" height={260}>
                                 <PieChart>
-                                    <Pie data={zoneData} cx="50%" cy="50%" innerRadius={55} outerRadius={85} paddingAngle={5} dataKey="value">
+                                    <Pie data={zoneData} cx="50%" cy="50%" innerRadius={65} outerRadius={95} paddingAngle={5} dataKey="value" stroke="none">
                                         {zoneData.map((entry, index) => (
                                             <Cell key={index} fill={ZONE_COLORS[entry.name] || PIE_COLORS[index % PIE_COLORS.length]} />
                                         ))}
                                     </Pie>
                                     <Tooltip content={<CustomTooltip />} />
-                                    <Legend formatter={(v) => <span style={{ color: '#94A3B8', fontSize: 12, textTransform: 'capitalize' }}>{v}</span>} />
+                                    <Legend 
+                                        iconType="circle"
+                                        formatter={(v) => <span style={{ color: '#94A3B8', fontSize: 12, fontWeight: 600, textTransform: 'capitalize' }}>{v}</span>} 
+                                    />
                                 </PieChart>
                             </ResponsiveContainer>
                         )}
