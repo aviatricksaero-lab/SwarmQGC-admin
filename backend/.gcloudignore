@@ -1,0 +1,8 @@
+node_modules/
+.env
+.git
+.gitignore
+.dockerignore
+requests.log
+users_log.txt
+users_output.txt

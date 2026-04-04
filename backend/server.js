@@ -3,6 +3,7 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const nodemailer = require('nodemailer');
 
 const User = require('./models/User');
 const Session = require('./models/Session');
@@ -11,6 +12,18 @@ const Facility = require('./models/Facility');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+// Nodemailer Transporter
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+    }
+});
+
+// OTP Storage (In-memory for simplicity, use Redis or DB for production)
+const otpStore = {};
 
 // Middleware
 app.use(cors());
@@ -40,16 +53,74 @@ mongoose.connect(MONGO_URI)
 //  USER ROUTES
 // =============================================================================
 
+// Send OTP
+app.post('/api/send-otp', async (req, res) => {
+    const { email } = req.body;
+    if (!email) return res.status(400).json({ success: false, message: 'Email is required' });
+
+    // Generate 6-digit OTP
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    
+    // Store OTP with 5-minute expiry
+    otpStore[email] = { 
+        otp, 
+        expires: Date.now() + 5 * 60 * 1000 
+    };
+
+    const mailOptions = {
+        from: process.env.EMAIL_USER,
+        to: email,
+        subject: 'QGC - Email Verification OTP',
+        text: `Your OTP for registration is: ${otp}. It will expire in 5 minutes.`
+    };
+
+    try {
+        await transporter.sendMail(mailOptions);
+        console.log(`OTP sent to ${email}: ${otp}`);
+        res.json({ success: true, message: 'OTP sent to your email' });
+    } catch (error) {
+        console.error('Error sending email:', error);
+        res.status(500).json({ success: false, message: 'Failed to send OTP. Check email configuration.' });
+    }
+});
+
+// Verify OTP
+app.post('/api/verify-otp', (req, res) => {
+    const { email, otp } = req.body;
+    if (!otpStore[email] || otpStore[email].otp !== otp) {
+        return res.status(400).json({ success: false, message: 'Invalid OTP' });
+    }
+    if (Date.now() > otpStore[email].expires) {
+        delete otpStore[email];
+        return res.status(400).json({ success: false, message: 'OTP expired' });
+    }
+    res.json({ success: true, message: 'OTP verified successfully' });
+});
+
 // Register User
 app.post('/api/register', async (req, res) => {
     try {
-        const { username, displayname, email, password, mobile_number } = req.body;
+        const { username, displayname, email, password, mobile_number, otp } = req.body;
+
+        // Verify OTP
+        if (!otpStore[email] || otpStore[email].otp !== otp) {
+            return res.status(400).json({ success: false, message: 'Invalid OTP' });
+        }
+        if (Date.now() > otpStore[email].expires) {
+            delete otpStore[email];
+            return res.status(400).json({ success: false, message: 'OTP expired' });
+        }
+
         const existingUser = await User.findOne({ $or: [{ email }, { username }] });
         if (existingUser) {
             return res.status(400).json({ success: false, message: 'User already exists' });
         }
         const newUser = new User({ username, displayname, email, password, mobile_number });
         await newUser.save();
+        
+        // Clean up OTP
+        delete otpStore[email];
+        
         res.status(201).json({ success: true, message: 'User registered successfully', user: newUser });
     } catch (err) {
         console.error(err);
