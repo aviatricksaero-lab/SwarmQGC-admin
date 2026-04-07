@@ -31,7 +31,8 @@ import {
     ChevronLeft as ChevronLeftIcon,
     Notifications as NotificationsIcon,
     Brightness4 as DarkIcon,
-    Shield as ShieldIcon
+    Shield as ShieldIcon,
+    History as HistoryIcon
 } from '@mui/icons-material';
 import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
@@ -42,6 +43,7 @@ import SessionsTable from './components/SessionsTable';
 import FeedbackList from './components/FeedbackList';
 import DashboardStats from './components/DashboardStats';
 import AirspaceManager from './components/AirspaceManager';
+import ActivityTable from './components/ActivityTable';
 
 const drawerWidth = 260;
 const collapsedWidth = 72;
@@ -126,6 +128,7 @@ const menuItems = [
     { text: 'Sessions', icon: <FlightIcon />, path: '/sessions', color: '#10B981' },
     { text: 'Feedback', icon: <FeedbackIcon />, path: '/feedback', color: '#F59E0B' },
     { text: 'Airspace', icon: <MapIcon />, path: '/airspace', color: '#EF4444' },
+    { text: 'Activity', icon: <HistoryIcon />, path: '/activity', color: '#EC4899' },
 ];
 
 function Navigation({ children }) {
@@ -400,6 +403,7 @@ function App() {
                         <Route path="/sessions" element={<SessionsTable />} />
                         <Route path="/feedback" element={<FeedbackList />} />
                         <Route path="/airspace" element={<AirspaceManager />} />
+                        <Route path="/activity" element={<ActivityTable />} />
                     </Routes>
                 </Navigation>
             </Router>

@@ -9,6 +9,7 @@ const User = require('./models/User');
 const Session = require('./models/Session');
 const Feedback = require('./models/Feedback');
 const Facility = require('./models/Facility');
+const ParameterActivity = require('./models/ParameterActivity');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -276,6 +277,36 @@ app.delete('/api/feedback/:id', async (req, res) => {
         res.json({ success: true, message: 'Feedback deleted' });
     } catch (err) {
         res.status(500).json({ success: false, message: 'Error deleting feedback' });
+    }
+});
+
+// =============================================================================
+//  PARAMETER ACTIVITY ROUTES
+// =============================================================================
+
+// Log Parameter Activity
+app.post('/api/parameter-activity', async (req, res) => {
+    try {
+        const { username, email, activity } = req.body;
+        if (!username || !email) {
+            return res.status(400).json({ success: false, message: 'Username and email are required' });
+        }
+        const newActivity = new ParameterActivity({ username, email, activity });
+        await newActivity.save();
+        res.status(201).json({ success: true, message: 'Activity logged' });
+    } catch (err) {
+        console.error('Error logging activity:', err);
+        res.status(500).json({ success: false, message: 'Error logging activity' });
+    }
+});
+
+// GET All Parameter Activity (Admin Panel)
+app.get('/api/parameter-activity', async (req, res) => {
+    try {
+        const activities = await ParameterActivity.find().sort({ timestamp: -1 }).limit(100);
+        res.json(activities);
+    } catch (err) {
+        res.status(500).json({ success: false, message: 'Error fetching activities' });
     }
 });
 
