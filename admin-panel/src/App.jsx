@@ -37,7 +37,6 @@ import {
 import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 
-
 // Components
 import UsersTable from './components/UsersTable';
 import SessionsTable from './components/SessionsTable';
