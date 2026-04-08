@@ -80,10 +80,10 @@ const ActivityTable = () => {
                         </Box>
                         <Box>
                             <Typography variant="h6" sx={{ fontWeight: 700, color: 'white' }}>
-                                Parameter Access History
+                                User Activity Log
                             </Typography>
                             <Typography variant="caption" sx={{ color: 'text.secondary' }}>
-                                Tracking user activity in sensitive settings
+                                Tracking system access and vehicle arming events
                             </Typography>
                         </Box>
                     </Box>

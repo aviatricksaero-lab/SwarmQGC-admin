@@ -84,9 +84,9 @@ const SessionsTable = () => {
                 {/* Header */}
                 <Box sx={{ p: 3, display: 'flex', alignItems: 'center', gap: 2, flexWrap: 'wrap', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
                     <Box sx={{ flex: 1 }}>
-                        <Typography variant="h6" sx={{ fontWeight: 700, color: 'white' }}>Flight Sessions</Typography>
+                        <Typography variant="h6" sx={{ fontWeight: 700, color: 'white' }}>Flight & Connection Sessions</Typography>
                         <Typography variant="caption" sx={{ color: 'text.secondary' }}>
-                            {filtered.length} total sessions
+                            {filtered.length} total sessions tracked
                         </Typography>
                     </Box>
                     <TextField
@@ -123,7 +123,7 @@ const SessionsTable = () => {
                     <Table stickyHeader size="small">
                         <TableHead>
                             <TableRow>
-                                {['Pilot', 'Date', 'Start', 'End', 'Duration', 'Status'].map(h => (
+                                {['Pilot', 'Date', 'Start', 'End', 'Duration', 'Type', 'Status'].map(h => (
                                     <TableCell key={h} sx={headCellSx}>{h}</TableCell>
                                 ))}
                             </TableRow>
@@ -180,6 +180,18 @@ const SessionsTable = () => {
                                                         {dur}m
                                                     </Typography>
                                                 </Box>
+                                            </TableCell>
+                                            <TableCell sx={cellSx}>
+                                                <Chip
+                                                    label={s.session_type || 'Connection'}
+                                                    size="small"
+                                                    sx={{
+                                                        bgcolor: s.session_type === 'Flight' ? alpha('#8B5CF6', 0.12) : alpha('#06B6D4', 0.12),
+                                                        color: s.session_type === 'Flight' ? '#8B5CF6' : '#06B6D4',
+                                                        border: `1px solid ${s.session_type === 'Flight' ? alpha('#8B5CF6', 0.3) : alpha('#06B6D4', 0.3)}`,
+                                                        fontWeight: 700, fontSize: '0.65rem',
+                                                    }}
+                                                />
                                             </TableCell>
                                             <TableCell sx={cellSx}>
                                                 <Chip

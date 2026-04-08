@@ -6,6 +6,7 @@ const SessionSchema = new mongoose.Schema({
     start_time: { type: String, required: true },
     end_time: { type: String, required: true },
     duration: { type: Number },
+    session_type: { type: String, default: 'Connection' }, // 'Connection' or 'Flight'
     created_at: { type: Date, default: Date.now }
 });
 

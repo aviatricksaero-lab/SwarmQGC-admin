@@ -10,6 +10,7 @@ const Session = require('./models/Session');
 const Feedback = require('./models/Feedback');
 const Facility = require('./models/Facility');
 const ParameterActivity = require('./models/ParameterActivity');
+const Mission = require('./models/Mission');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -213,8 +214,8 @@ app.post('/api/reset-password', async (req, res) => {
 // Save Session
 app.post('/api/sessions', async (req, res) => {
     try {
-        const { username, date, start_time, end_time, duration } = req.body;
-        const newSession = new Session({ username, date, start_time, end_time, duration });
+        const { username, date, start_time, end_time, duration, session_type } = req.body;
+        const newSession = new Session({ username, date, start_time, end_time, duration, session_type });
         await newSession.save();
         res.status(201).json({ success: true, message: 'Session saved' });
     } catch (err) {
@@ -502,6 +503,46 @@ app.post('/api/facilities/seed', async (req, res) => {
     } catch (err) {
         console.error(err);
         res.status(500).json({ success: false, message: 'Error seeding data' });
+    }
+});
+
+// =============================================================================
+//  MISSION ROUTES
+// =============================================================================
+
+// Save Mission
+app.post('/api/missions', async (req, res) => {
+    try {
+        const { username, mission_name, plan_data, geometry, date } = req.body;
+        if (!username || !mission_name || !geometry) {
+            return res.status(400).json({ success: false, message: 'Missing required mission fields' });
+        }
+        const newMission = new Mission({ username, mission_name, plan_data, geometry, date });
+        await newMission.save();
+        res.status(201).json({ success: true, message: 'Mission log saved successfully' });
+    } catch (err) {
+        console.error('Error saving mission:', err);
+        res.status(500).json({ success: false, message: 'Error saving mission log' });
+    }
+});
+
+// GET All Missions (Admin Panel)
+app.get('/api/missions', async (req, res) => {
+    try {
+        const missions = await Mission.find().sort({ created_at: -1 });
+        res.json(missions);
+    } catch (err) {
+        res.status(500).json({ success: false, message: 'Error fetching missions' });
+    }
+});
+
+// DELETE Mission
+app.delete('/api/missions/:id', async (req, res) => {
+    try {
+        await Mission.findByIdAndDelete(req.params.id);
+        res.json({ success: true, message: 'Mission deleted' });
+    } catch (err) {
+        res.status(500).json({ success: false, message: 'Error deleting mission' });
     }
 });
 

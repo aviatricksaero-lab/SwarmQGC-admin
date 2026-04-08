@@ -157,6 +157,16 @@ const DashboardStats = () => {
             const feedback = feedbackRes.data;
             const facilities = facilitiesRes.data?.features || [];
 
+            // Calculate Flight Stats
+            let totalMinutes = 0;
+            let completedFlights = 0;
+            sessions.forEach(s => {
+                if (s.session_type === 'Flight') {
+                    totalMinutes += (s.duration || 0);
+                    if (s.end_time) completedFlights++;
+                }
+            });
+
             // Monthly registrations (last 6 months)
             const monthMap = {};
             for (let i = 5; i >= 0; i--) {
@@ -183,18 +193,13 @@ const DashboardStats = () => {
             });
             setZoneData(Object.entries(zoneCount).map(([name, value]) => ({ name, value })));
 
-            // Sessions by user (top 7)
-            const sessionsByUser = {};
-            sessions.forEach(s => {
-                sessionsByUser[s.username] = (sessionsByUser[s.username] || 0) + 1;
-            });
-            // (used below in barChartData)
-
             setStats({
                 userCount: users.length,
                 sessionCount: sessions.length,
                 feedbackCount: feedback.length,
                 facilityCount: facilities.length,
+                totalFlightHours: (totalMinutes / 60).toFixed(1),
+                missionsCompleted: completedFlights
             });
             setRecentUsers(users.slice(0, 5));
             setRecentSessions(sessions.slice(0, 5));
@@ -219,9 +224,9 @@ const DashboardStats = () => {
             <Grid container spacing={3} sx={{ mb: 4 }}>
                 {[
                     { title: 'Total Users', value: stats.userCount, icon: <UsersIcon />, color: '#7C3AED', subtitle: 'Registered pilots' },
-                    { title: 'Flight Sessions', value: stats.sessionCount, icon: <FlightsIcon />, color: '#10B981', subtitle: 'Total logged flights' },
+                    { title: 'Hours Flown', value: stats.totalFlightHours + 'h', icon: <TimelineIcon />, color: '#06B6D4', subtitle: 'Total logged duration' },
+                    { title: 'Missions', value: stats.missionsCompleted, icon: <FlightsIcon />, color: '#10B981', subtitle: 'Completed flights' },
                     { title: 'Feedback', value: stats.feedbackCount, icon: <FeedbackIcon />, color: '#F59E0B', subtitle: 'User submissions' },
-                    { title: 'Airspace Zones', value: stats.facilityCount, icon: <MapIcon />, color: '#EF4444', subtitle: 'Active zones' },
                 ].map((card) => (
                     <Grid item xs={12} sm={6} lg={3} key={card.title}>
                         <StatCard {...card} loading={loading} />
@@ -417,16 +422,29 @@ const DashboardStats = () => {
                                                 {s.date} · {s.start_time} → {s.end_time}
                                             </Typography>
                                         </Box>
-                                        <Chip
-                                            label={`${Math.round(s.duration || 0)}m`}
-                                            size="small"
-                                            sx={{
-                                                bgcolor: alpha('#10B981', 0.15),
-                                                color: '#10B981',
-                                                border: `1px solid ${alpha('#10B981', 0.3)}`,
-                                                fontWeight: 600, fontSize: '0.7rem',
-                                            }}
-                                        />
+                                        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 0.5 }}>
+                                            <Chip
+                                                label={s.session_type || 'Connection'}
+                                                size="small"
+                                                sx={{
+                                                    bgcolor: s.session_type === 'Flight' ? alpha('#8B5CF6', 0.12) : alpha('#06B6D4', 0.12),
+                                                    color: s.session_type === 'Flight' ? '#8B5CF6' : '#06B6D4',
+                                                    border: `1px solid ${s.session_type === 'Flight' ? alpha('#8B5CF6', 0.3) : alpha('#06B6D4', 0.3)}`,
+                                                    fontWeight: 700, fontSize: '0.65rem',
+                                                    height: 20
+                                                }}
+                                            />
+                                            <Chip
+                                                label={`${Math.round(s.duration || 0)}m`}
+                                                size="small"
+                                                sx={{
+                                                    bgcolor: alpha('#10B981', 0.15),
+                                                    color: '#10B981',
+                                                    border: `1px solid ${alpha('#10B981', 0.3)}`,
+                                                    fontWeight: 600, fontSize: '0.7rem',
+                                                }}
+                                            />
+                                        </Box>
                                     </Box>
                                 ))}
                             </Box>

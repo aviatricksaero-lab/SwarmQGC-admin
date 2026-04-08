@@ -45,6 +45,7 @@ import FeedbackList from './components/FeedbackList';
 import DashboardStats from './components/DashboardStats';
 import AirspaceManager from './components/AirspaceManager';
 import ActivityTable from './components/ActivityTable';
+import MissionsTable from './components/MissionsTable';
 
 const drawerWidth = 260;
 const collapsedWidth = 72;
@@ -127,6 +128,7 @@ const menuItems = [
     { text: 'Dashboard', icon: <DashboardIcon />, path: '/', color: '#7C3AED' },
     { text: 'Users', icon: <PeopleIcon />, path: '/users', color: '#06B6D4' },
     { text: 'Sessions', icon: <FlightIcon />, path: '/sessions', color: '#10B981' },
+    { text: 'Missions', icon: <MapIcon />, path: '/missions', color: '#8B5CF6' },
     { text: 'Feedback', icon: <FeedbackIcon />, path: '/feedback', color: '#F59E0B' },
     { text: 'Airspace', icon: <MapIcon />, path: '/airspace', color: '#EF4444' },
     { text: 'Activity', icon: <HistoryIcon />, path: '/activity', color: '#EC4899' },
@@ -385,7 +387,7 @@ function Navigation({ children }) {
 function App() {
     return (
         <ThemeProvider theme={darkTheme}>
-            <Router>
+            <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                 <Toaster
                     position="top-right"
                     toastOptions={{
@@ -402,6 +404,7 @@ function App() {
                         <Route path="/" element={<DashboardStats />} />
                         <Route path="/users" element={<UsersTable />} />
                         <Route path="/sessions" element={<SessionsTable />} />
+                        <Route path="/missions" element={<MissionsTable />} />
                         <Route path="/feedback" element={<FeedbackList />} />
                         <Route path="/airspace" element={<AirspaceManager />} />
                         <Route path="/activity" element={<ActivityTable />} />
