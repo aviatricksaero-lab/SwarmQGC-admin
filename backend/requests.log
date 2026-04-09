@@ -9,3 +9,13 @@
 Body: {"force":true}
 2026-02-17T05:33:49.352Z - GET /api/facilities?all=true [IP: ::1]
 2026-02-17T06:54:38.025Z - GET /api/facilities?all=true [IP: ::1]
+2026-04-09T09:15:49.401Z - POST /api/send-otp [IP: ::1]
+Body: {"email":"darsinichitra18@gmail.com"}
+2026-04-09T09:17:49.461Z - POST /api/forgot-password [IP: ::1]
+Body: {"email":"darsinichitra18@gmail.com","otp":"276110","newPassword":"Csbd1718M"}
+2026-04-09T09:36:52.235Z - POST /api/send-otp [IP: ::1]
+Body: {"email":"darsinichitra18@gmail.com","type":"registration"}
+2026-04-09T09:39:00.523Z - POST /api/send-otp [IP: ::1]
+Body: {"email":"darsinichitra18@gmail.com","type":"registration"}
+2026-04-09T09:39:38.174Z - POST /api/send-otp [IP: ::1]
+Body: {"email":"darsinichitra18@gmail.com","type":"forgot password"}

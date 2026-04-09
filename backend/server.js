@@ -55,63 +55,120 @@ mongoose.connect(MONGO_URI)
 //  USER ROUTES
 // =============================================================================
 
-// Send OTP
+//Send OTP for Registration or Forgot Password
 app.post('/api/send-otp', async (req, res) => {
-    const { email } = req.body;
-    if (!email) return res.status(400).json({ success: false, message: 'Email is required' });
+    const { email, type } = req.body; // type = "registration" or "forgotPassword"
 
-    // Generate 6-digit OTP
+    if (!email || !type) {
+        return res.status(400).json({ success: false, message: 'Email and OTP type required' });
+    }
+
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
-    
-    // Store OTP with 5-minute expiry
-    otpStore[email] = { 
-        otp, 
-        expires: Date.now() + 5 * 60 * 1000 
+
+    if (!otpStore[email]) otpStore[email] = {};
+
+    otpStore[email][type] = {
+        otp,
+        expires: Date.now() + 5 * 60 * 1000
     };
 
-    const mailOptions = {
-        from: process.env.EMAIL_USER,
-        to: email,
-        subject: 'QGC - Email Verification OTP',
-        text: `Your OTP for registration is: ${otp}. It will expire in 5 minutes.`
-    };
+
+  const mailOptions = {
+    from: process.env.EMAIL_USER,
+    to: email,
+    subject: type === "registration" 
+             ? "Registration OTP"
+             : "Forgot Password OTP",
+    
+    text: `Your OTP for ${type === "registration" ? "registration" : "forgot password"} is: ${otp}. 
+This OTP will expire in 5 minutes.`,
+
+    html: `
+        <p>Hi,</p>
+        <p>Your OTP for <strong>${type === "registration" ? "registration" : "password reset"}</strong> is:</p>
+        <h2>${otp}</h2>
+        <p>This OTP expires in 5 minutes.</p>
+    `
+};
 
     try {
         await transporter.sendMail(mailOptions);
-        console.log(`OTP sent to ${email}: ${otp}`);
-        res.json({ success: true, message: 'OTP sent to your email' });
-    } catch (error) {
-        console.error('Error sending email:', error);
-        res.status(500).json({ success: false, message: 'Failed to send OTP. Check email configuration.' });
+        res.json({ success: true, message: `OTP sent for ${type}` });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ success: false, message: 'Failed to send OTP' });
     }
 });
 
 // Verify OTP
 app.post('/api/verify-otp', (req, res) => {
-    const { email, otp } = req.body;
-    if (!otpStore[email] || otpStore[email].otp !== otp) {
+    const { email, otp, type } = req.body;
+
+    if (!otpStore[email] || !otpStore[email][type]) {
+        return res.status(400).json({ success: false, message: 'OTP not found' });
+    }
+
+    const record = otpStore[email][type];
+
+    if (record.otp !== otp) {
         return res.status(400).json({ success: false, message: 'Invalid OTP' });
     }
-    if (Date.now() > otpStore[email].expires) {
-        delete otpStore[email];
+
+    if (Date.now() > record.expires) {
+        delete otpStore[email][type];
         return res.status(400).json({ success: false, message: 'OTP expired' });
     }
+
     res.json({ success: true, message: 'OTP verified successfully' });
 });
 
+
+// Forgot Password - Set New Password
+app.post('/api/forgot-password', async (req, res) => {
+    try {
+        const { email, otp, newPassword } = req.body;
+
+       const record = otpStore[email]?.forgotPassword;
+if (!record || record.otp !== otp) {
+    return res.status(400).json({ success: false, message: 'Invalid OTP' });
+}
+if (Date.now() > record.expires) {
+    delete otpStore[email].forgotPassword;
+    return res.status(400).json({ success: false, message: 'OTP expired' });
+}
+
+        // Update password
+        const user = await User.findOneAndUpdate(
+            { email },
+            { password: newPassword },
+            { new: true }
+        );
+
+        if (!user) return res.status(404).json({ success: false, message: 'User not found' });
+
+        delete otpStore[email];
+
+        res.json({ success: true, message: 'Password reset successfully' });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ success: false, message: 'Server error resetting password' });
+    }
+});
 // Register User
 app.post('/api/register', async (req, res) => {
     try {
         const { username, displayname, email, password, mobile_number, otp } = req.body;
 
         // Verify OTP
-        if (!otpStore[email] || otpStore[email].otp !== otp) {
-            return res.status(400).json({ success: false, message: 'Invalid OTP' });
-        }
-        if (Date.now() > otpStore[email].expires) {
-            delete otpStore[email];
-            return res.status(400).json({ success: false, message: 'OTP expired' });
-        }
+      const record = otpStore[email]?.registration;
+if (!record || record.otp !== otp) {
+    return res.status(400).json({ success: false, message: 'Invalid OTP' });
+}
+if (Date.now() > record.expires) {
+    delete otpStore[email].registration;
+    return res.status(400).json({ success: false, message: 'OTP expired' });
+}
 
         const existingUser = await User.findOne({ $or: [{ email }, { username }] });
         if (existingUser) {
@@ -545,6 +602,7 @@ app.delete('/api/missions/:id', async (req, res) => {
         res.status(500).json({ success: false, message: 'Error deleting mission' });
     }
 });
+
 
 // =============================================================================
 //  START SERVER
