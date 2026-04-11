@@ -19,3 +19,203 @@ Body: {"email":"darsinichitra18@gmail.com","type":"registration"}
 Body: {"email":"darsinichitra18@gmail.com","type":"registration"}
 2026-04-09T09:39:38.174Z - POST /api/send-otp [IP: ::1]
 Body: {"email":"darsinichitra18@gmail.com","type":"forgot password"}
+2026-04-11T06:50:31.555Z - POST /api/send-otp [IP: ::ffff:192.168.137.172]
+Body: {"email":"darsinitestai7@gmail.com","type":"registration"}
+2026-04-11T06:50:38.114Z - POST /api/send-otp [IP: ::ffff:192.168.137.172]
+Body: {"email":"darsinitestai7@gmail.com","type":"registration"}
+2026-04-11T06:50:56.213Z - POST /api/send-otp [IP: ::ffff:192.168.137.172]
+Body: {"email":"darsinitestai7@gmail.com","type":"registration"}
+2026-04-11T06:54:02.496Z - POST /api/send-otp [IP: ::ffff:192.168.137.172]
+Body: {"email":"darsinitestai7@gmail.com","type":"registration"}
+2026-04-11T06:54:20.755Z - POST /api/verify-otp [IP: ::ffff:192.168.137.172]
+Body: {"email":"darsinitestai7@gmail.com","otp":"675241","type":"registration"}
+2026-04-11T06:57:36.828Z - POST /api/send-otp [IP: ::ffff:192.168.137.172]
+Body: {"email":"darsinitestai7@gmail.com","type":"registration"}
+2026-04-11T06:59:01.085Z - POST /api/verify-otp [IP: ::ffff:192.168.137.172]
+Body: {"email":"darsinitestai7@gmail.com","otp":"965792","type":"registration"}
+2026-04-11T06:59:21.491Z - POST /api/register [IP: ::ffff:192.168.137.172]
+Body: {"username":"Csbd_1718","displayname":"Darsini","email":"darsinitestai7@gmail.com","password":"Csbd1718","otp":"965792"}
+2026-04-11T06:59:36.412Z - POST /api/send-otp [IP: ::ffff:192.168.137.172]
+Body: {"email":"darsinitestai7@gmail.com","type":"forgotPassword"}
+2026-04-11T07:00:10.001Z - POST /api/send-otp [IP: ::ffff:192.168.137.172]
+Body: {"email":"darsinitestai7@gmail.com","type":"forgotPassword"}
+2026-04-11T07:00:55.827Z - POST /api/send-otp [IP: ::ffff:192.168.137.172]
+Body: {"email":"darsinitestai7@gmail.com","type":"forgotPassword"}
+2026-04-11T07:01:49.894Z - POST /api/verify-otp [IP: ::ffff:192.168.137.172]
+Body: {"email":"darsinitestai7@gmail.com","otp":"734268","type":"forgotPassword"}
+2026-04-11T07:02:48.173Z - POST /api/verify-otp [IP: ::ffff:192.168.137.172]
+Body: {"email":"darsinitestai7@gmail.com","otp":"699615","type":"forgotPassword"}
+2026-04-11T07:04:23.026Z - POST /api/verify-otp [IP: ::ffff:192.168.137.172]
+Body: {"email":"darsinitestai7@gmail.com","otp":"917287","type":"forgotPassword"}
+2026-04-11T07:04:41.926Z - POST /api/forgot-password [IP: ::ffff:192.168.137.172]
+Body: {"email":"darsinitestai7@gmail.com","otp":"917287","newPassword":"Csbd1718@"}
+2026-04-11T07:04:55.427Z - POST /api/login [IP: ::ffff:192.168.137.172]
+Body: {"userInput":"darsinitestai7@gmail.com","password":"Csbd1718@"}
+2026-04-11T07:05:18.018Z - POST /api/login [IP: ::ffff:192.168.137.172]
+Body: {"userInput":"Csbd_1718","password":"Csbd1718@"}
+2026-04-11T07:05:36.179Z - POST /api/login [IP: ::ffff:192.168.137.172]
+Body: {"userInput":"darsinitestai7@gmail.com","password":"Csbd1718"}
+2026-04-11T07:05:57.867Z - POST /api/login [IP: ::ffff:192.168.137.172]
+Body: {"userInput":"darsinitestai7@gmail.com","password":"Csbd1718"}
+2026-04-11T07:06:06.439Z - POST /api/login [IP: ::ffff:192.168.137.172]
+Body: {"userInput":"darsinitestai7@gmail.com","password":"Csbd1718@"}
+2026-04-11T07:07:41.225Z - POST /api/send-otp [IP: ::ffff:192.168.137.172]
+Body: {"email":"darsinitestai7@gmail.com","type":"forgotPassword"}
+2026-04-11T07:08:14.092Z - POST /api/verify-otp [IP: ::ffff:192.168.137.172]
+Body: {"email":"darsinitestai7@gmail.com","otp":"420719","type":"forgotPassword"}
+2026-04-11T07:09:21.125Z - POST /api/login [IP: ::ffff:192.168.137.172]
+Body: {"userInput":"darsinitestai7@gmail.com","password":"Csbd1718@"}
+2026-04-11T07:32:30.586Z - POST /api/send-otp [IP: ::ffff:192.168.137.172]
+Body: {"email":"darsinitestai7@gmail.com","type":"forgotPassword"}
+2026-04-11T07:33:14.045Z - POST /api/send-otp [IP: ::ffff:192.168.137.172]
+Body: {"email":"darsinitestai7@gmail.com","type":"forgotPassword"}
+2026-04-11T07:34:29.504Z - POST /api/send-otp [IP: ::ffff:192.168.137.172]
+Body: {"email":"darsinitestai7@gmail.com","type":"forgotPassword"}
+2026-04-11T07:34:29.635Z - POST /api/send-otp [IP: ::ffff:192.168.137.172]
+Body: {"email":"darsinitestai7@gmail.com","type":"forgotPassword"}
+2026-04-11T07:34:29.783Z - POST /api/send-otp [IP: ::ffff:192.168.137.172]
+Body: {"email":"darsinitestai7@gmail.com","type":"forgotPassword"}
+2026-04-11T07:34:29.918Z - POST /api/send-otp [IP: ::ffff:192.168.137.172]
+Body: {"email":"darsinitestai7@gmail.com","type":"forgotPassword"}
+2026-04-11T07:34:37.270Z - POST /api/send-otp [IP: ::ffff:192.168.137.172]
+Body: {"email":"darsinitestai7@gmail.com","type":"forgotPassword"}
+2026-04-11T07:34:37.275Z - POST /api/send-otp [IP: ::ffff:192.168.137.172]
+Body: {"email":"darsinitestai7@gmail.com","type":"forgotPassword"}
+2026-04-11T07:36:31.960Z - POST /api/send-otp [IP: ::ffff:192.168.137.172]
+Body: {"email":"darsinitestai7@gmail.com","type":"forgotPassword"}
+2026-04-11T07:36:31.967Z - POST /api/send-otp [IP: ::ffff:192.168.137.172]
+Body: {"email":"darsinitestai7@gmail.com","type":"forgotPassword"}
+2026-04-11T08:37:19.645Z - POST /api/login [IP: ::ffff:192.168.137.57]
+Body: {"userInput":"darsinitestai7@gmail.com","password":"Csbd1718@"}
+2026-04-11T08:45:33.219Z - POST /api/send-otp [IP: ::ffff:192.168.137.57]
+Body: {"email":"darsinitestai7@gmail.com","type":"forgotPassword"}
+2026-04-11T09:21:09.672Z - POST /api/send-otp [IP: ::ffff:192.168.137.57]
+Body: {"email":"darsinitestai7@gmail.com","type":"forgotPassword"}
+2026-04-11T09:22:05.483Z - POST /api/login [IP: ::ffff:192.168.137.57]
+Body: {"userInput":"darsinitestai7@gmail.com","password":"Csbd1718@"}
+2026-04-11T09:55:33.953Z - POST /api/change-password [IP: ::ffff:192.168.137.57]
+Body: {"username":"","oldPassword":"Csbd1718@","newPassword":"Cwbd1718#"}
+2026-04-11T10:40:17.715Z - POST /api/send-otp [IP: ::ffff:192.168.137.195]
+Body: {"email":"darsinitestai7@gmail.com","type":"forgotPassword"}
+2026-04-11T10:48:38.987Z - POST /api/send-otp [IP: ::ffff:192.168.137.195]
+Body: {"email":"darsinichitra18@gmail.com","type":"forgotPassword"}
+2026-04-11T10:49:07.905Z - POST /api/send-otp [IP: ::ffff:192.168.137.195]
+Body: {"email":"darsinichitra18@gmail.com","type":"forgotPassword"}
+2026-04-11T10:52:06.916Z - POST /api/verify-otp [IP: ::ffff:192.168.137.195]
+Body: {"email":"darsinichitra18@gmail.com","otp":"701163","type":"forgotPassword"}
+2026-04-11T10:52:27.844Z - POST /api/forgot-password [IP: ::ffff:192.168.137.195]
+Body: {"email":"darsinichitra18@gmail.com","otp":"701163","newPassword":"Csbd1718₹"}
+2026-04-11T10:52:59.260Z - POST /api/forgot-password [IP: ::ffff:192.168.137.195]
+Body: {"email":"darsinichitra18@gmail.com","otp":"701163","newPassword":"Csbd1718₹"}
+2026-04-11T11:02:07.233Z - POST /api/send-otp [IP: ::ffff:192.168.137.195]
+Body: {"email":"darsinitestai7@gmail.com","type":"forgotPassword"}
+2026-04-11T11:05:32.341Z - POST /api/verify-otp [IP: ::ffff:192.168.137.195]
+Body: {"email":"darsinitestai7@gmail.com","otp":"477894","type":"forgotPassword"}
+2026-04-11T11:05:51.440Z - POST /api/forgot-password [IP: ::ffff:192.168.137.195]
+Body: {"email":"darsinitestai7@gmail.com","otp":"477894","newPassword":"Csbd1718₹"}
+2026-04-11T11:06:23.219Z - POST /api/login [IP: ::ffff:192.168.137.195]
+Body: {"userInput":"darsinitestai7@gmail.com","password":"Csbd1718₹"}
+2026-04-11T11:07:38.209Z - POST /api/change-password [IP: ::ffff:192.168.58.73]
+Body: {"username":"","oldPassword":"Csbd1718₹","newPassword":"Csbd1718&"}
+2026-04-11T11:13:07.149Z - POST /api/change-password [IP: ::ffff:192.168.137.195]
+Body: {"username":"","oldPassword":"Csbd1718₹","newPassword":"Csbd1718+"}
+2026-04-11T11:13:59.396Z - POST /api/change-password [IP: ::ffff:192.168.137.195]
+Body: {"username":"","oldPassword":"Csbd1718₹","newPassword":"Csbd1718+"}
+2026-04-11T11:26:08.549Z - POST /api/change-password [IP: ::ffff:192.168.137.195]
+Body: {"username":"Csbd_1718","oldPassword":"Csbd1718&","newPassword":"Csbd1718+"}
+2026-04-11T11:26:09.862Z - POST /api/change-password [IP: ::ffff:192.168.137.195]
+Body: {"username":"Csbd_1718","oldPassword":"Csbd1718&","newPassword":"Csbd1718+"}
+2026-04-11T11:26:10.912Z - POST /api/change-password [IP: ::ffff:192.168.137.195]
+Body: {"username":"Csbd_1718","oldPassword":"Csbd1718&","newPassword":"Csbd1718+"}
+2026-04-11T11:26:11.465Z - POST /api/change-password [IP: ::ffff:192.168.137.195]
+Body: {"username":"Csbd_1718","oldPassword":"Csbd1718&","newPassword":"Csbd1718+"}
+2026-04-11T11:26:14.995Z - POST /api/change-password [IP: ::ffff:192.168.137.195]
+Body: {"username":"Csbd_1718","oldPassword":"Csbd1718&","newPassword":"Csbd1718+"}
+2026-04-11T11:26:15.159Z - POST /api/change-password [IP: ::ffff:192.168.137.195]
+Body: {"username":"Csbd_1718","oldPassword":"Csbd1718&","newPassword":"Csbd1718+"}
+2026-04-11T11:35:18.631Z - POST /api/login [IP: ::ffff:192.168.137.195]
+Body: {"userInput":"darsinitestai7@gmail.com","password":"Csbd1717₹"}
+2026-04-11T11:35:23.233Z - POST /api/login [IP: ::ffff:192.168.137.195]
+Body: {"userInput":"darsinitestai7@gmail.com","password":"Csbd1717&"}
+2026-04-11T11:35:24.616Z - POST /api/login [IP: ::ffff:192.168.137.195]
+Body: {"userInput":"darsinitestai7@gmail.com","password":"Csbd1717&"}
+2026-04-11T11:35:34.442Z - POST /api/login [IP: ::ffff:192.168.137.195]
+Body: {"userInput":"darsinitestai7@gmail.com","password":"Csbd1717+"}
+2026-04-11T11:35:35.812Z - POST /api/login [IP: ::ffff:192.168.137.195]
+Body: {"userInput":"darsinitestai7@gmail.com","password":"Csbd1717+"}
+2026-04-11T11:35:46.288Z - POST /api/login [IP: ::ffff:192.168.137.195]
+Body: {"userInput":"darsinitestai7@gmail.com","password":"Csbd1718+"}
+2026-04-11T11:36:30.810Z - POST /api/login [IP: ::ffff:192.168.137.195]
+Body: {"userInput":"darsinitestai7@gmail.com","password":"Csbd1718+"}
+2026-04-11T11:37:57.683Z - POST /api/login [IP: ::ffff:192.168.137.195]
+Body: {"userInput":"darsinitestai7@gmail.com","password":"Csbd1718₹"}
+2026-04-11T11:38:34.658Z - POST /api/change-password [IP: ::ffff:192.168.137.195]
+Body: {"username":"Csbd_1718","oldPassword":"Csbd1718₹","newPassword":"Csbd1718+"}
+2026-04-11T11:38:38.493Z - POST /api/change-password [IP: ::ffff:192.168.137.195]
+Body: {"username":"Csbd_1718","oldPassword":"Csbd1718₹","newPassword":"Csbd1718+"}
+2026-04-11T11:38:39.189Z - POST /api/change-password [IP: ::ffff:192.168.137.195]
+Body: {"username":"Csbd_1718","oldPassword":"Csbd1718₹","newPassword":"Csbd1718+"}
+2026-04-11T11:38:39.772Z - POST /api/change-password [IP: ::ffff:192.168.137.195]
+Body: {"username":"Csbd_1718","oldPassword":"Csbd1718₹","newPassword":"Csbd1718+"}
+2026-04-11T11:44:00.431Z - POST /api/change-password [IP: ::ffff:192.168.137.195]
+Body: {"username":"Csbd_1718","oldPassword":"Csbd1718₹","newPassword":"Csbd1718("}
+2026-04-11T11:46:06.559Z - POST /api/login [IP: ::ffff:192.168.137.195]
+Body: {"userInput":"darsinitestai7@gmail.com","password":"Csbd1718₹"}
+2026-04-11T11:46:09.208Z - POST /api/login [IP: ::ffff:192.168.137.195]
+Body: {"userInput":"darsinitestai7@gmail.com","password":"Csbd1718₹"}
+2026-04-11T11:46:16.203Z - POST /api/login [IP: ::ffff:192.168.137.195]
+Body: {"userInput":"darsinitestai7@gmail.com","password":"Csbd1718&"}
+2026-04-11T11:46:22.909Z - POST /api/login [IP: ::ffff:192.168.137.195]
+Body: {"userInput":"darsinitestai7@gmail.com","password":"Csbd1718("}
+2026-04-11T11:46:34.993Z - POST /api/login [IP: ::ffff:192.168.137.195]
+Body: {"userInput":"darsinitestai7@gmail.com","password":"Csbd1718#"}
+2026-04-11T11:46:47.278Z - POST /api/login [IP: ::ffff:192.168.137.195]
+Body: {"userInput":"darsinitestai7@gmail.com","password":"Csbd1718&"}
+2026-04-11T11:46:58.202Z - POST /api/login [IP: ::ffff:192.168.137.195]
+Body: {"userInput":"darsinitestai7@gmail.com","password":"Csbd1718##"}
+2026-04-11T11:47:08.243Z - POST /api/login [IP: ::ffff:192.168.137.195]
+Body: {"userInput":"darsinitestai7@gmail.com","password":"Csbd1718₹"}
+2026-04-11T11:47:24.103Z - POST /api/login [IP: ::ffff:192.168.137.195]
+Body: {"userInput":"darsinitestai7@gmail.com","password":"Csbd1718₹"}
+2026-04-11T11:47:26.300Z - POST /api/login [IP: ::ffff:192.168.137.195]
+Body: {"userInput":"darsinitestai7@gmail.com","password":"Csbd1718₹"}
+2026-04-11T11:48:15.759Z - POST /api/login [IP: ::ffff:192.168.137.195]
+Body: {"userInput":"darsinitestai7@gmail.com","password":"Csbd1718+"}
+2026-04-11T11:48:33.691Z - POST /api/login [IP: ::ffff:192.168.137.195]
+Body: {"userInput":"darsinitestai7@gmail.com","password":"Csbd1718+"}
+2026-04-11T11:49:03.882Z - POST /api/change-password [IP: ::ffff:192.168.137.195]
+Body: {"username":"Csbd_1718","oldPassword":"Csbd1718+","newPassword":"Csbd1718&"}
+2026-04-11T11:49:28.676Z - POST /api/login [IP: ::ffff:192.168.137.195]
+Body: {"userInput":"darsinitestai7@gmail.com","password":"Csbd1718&"}
+2026-04-11T11:55:02.851Z - POST /api/send-otp [IP: ::ffff:192.168.137.195]
+Body: {"email":"darsinitestai7@gmail.com","type":"forgotPassword"}
+2026-04-11T11:57:14.742Z - POST /api/send-otp [IP: ::ffff:192.168.137.195]
+Body: {"email":"darsinitestai7@gmail.com","type":"forgotPassword"}
+2026-04-11T11:57:21.009Z - POST /api/verify-otp [IP: ::ffff:192.168.137.195]
+Body: {"email":"darsinitestai7@gmail.com","otp":"477894","type":"forgotPassword"}
+2026-04-11T11:57:23.278Z - POST /api/verify-otp [IP: ::ffff:192.168.137.195]
+Body: {"email":"darsinitestai7@gmail.com","otp":"477894","type":"forgotPassword"}
+2026-04-11T11:58:45.471Z - POST /api/send-otp [IP: ::ffff:192.168.137.195]
+Body: {"email":"darsinitestai7@gmail.com","type":"forgotPassword"}
+2026-04-11T11:59:09.950Z - POST /api/verify-otp [IP: ::ffff:192.168.137.195]
+Body: {"email":"darsinitestai7@gmail.com","otp":"362161","type":"forgotPassword"}
+2026-04-11T11:59:11.553Z - POST /api/verify-otp [IP: ::ffff:192.168.137.195]
+Body: {"email":"darsinitestai7@gmail.com","otp":"362161","type":"forgotPassword"}
+2026-04-11T11:59:14.359Z - POST /api/verify-otp [IP: ::ffff:192.168.137.195]
+Body: {"email":"darsinitestai7@gmail.com","otp":"362161","type":"forgotPassword"}
+2026-04-11T11:59:14.970Z - POST /api/verify-otp [IP: ::ffff:192.168.137.195]
+Body: {"email":"darsinitestai7@gmail.com","otp":"362161","type":"forgotPassword"}
+2026-04-11T11:59:15.163Z - POST /api/verify-otp [IP: ::ffff:192.168.137.195]
+Body: {"email":"darsinitestai7@gmail.com","otp":"362161","type":"forgotPassword"}
+2026-04-11T11:59:15.425Z - POST /api/verify-otp [IP: ::ffff:192.168.137.195]
+Body: {"email":"darsinitestai7@gmail.com","otp":"362161","type":"forgotPassword"}
+2026-04-11T11:59:33.004Z - POST /api/verify-otp [IP: ::ffff:192.168.137.195]
+Body: {"email":"darsinitestai7@gmail.com","otp":"601135","type":"forgotPassword"}
+2026-04-11T12:00:07.330Z - POST /api/forgot-password [IP: ::ffff:192.168.137.195]
+Body: {"email":"darsinitestai7@gmail.com","otp":"601135","newPassword":"Csbd1617@"}
+2026-04-11T12:00:27.291Z - POST /api/login [IP: ::ffff:192.168.137.195]
+Body: {"userInput":"darsinitestai7@gmail.com","password":"Csbd1617@"}
+2026-04-11T12:01:36.109Z - POST /api/change-password [IP: ::ffff:192.168.137.195]
+Body: {"username":"Csbd_1718","oldPassword":"Csbd1617@","newPassword":"123456789"}
+2026-04-11T12:02:01.111Z - POST /api/login [IP: ::ffff:192.168.137.195]
+Body: {"userInput":"darsinitestai7@gmail.com","password":"123456789"}

@@ -157,9 +157,10 @@ if (Date.now() > record.expires) {
 });
 // Register User
 app.post('/api/register', async (req, res) => {
+    console.log("Registration request received with data:", req.body);
     try {
         const { username, displayname, email, password, mobile_number, otp } = req.body;
-
+    console.log(`Attempting to register user: ${username}, email: ${email}`);
         // Verify OTP
       const record = otpStore[email]?.registration;
 if (!record || record.otp !== otp) {
@@ -181,7 +182,9 @@ if (Date.now() > record.expires) {
         delete otpStore[email];
         
         res.status(201).json({ success: true, message: 'User registered successfully', user: newUser });
+        console.log(`User registered successfully: ${username} (${email})`);
     } catch (err) {
+        console.log("Error during registration:", err);
         console.error(err);
         res.status(500).json({ success: false, message: 'Server error during registration' });
     }
@@ -195,6 +198,7 @@ app.post('/api/login', async (req, res) => {
         if (!user) return res.status(404).json({ success: false, message: 'User not found' });
         if (user.password !== password) return res.status(401).json({ success: false, message: 'Invalid credentials' });
         res.json({ success: true, message: 'Login successful', user });
+        console.log(`User logged in successfully: ${user.username} (${user.email})`);
     } catch (err) {
         console.error(err);
         res.status(500).json({ success: false, message: 'Server error during login' });
@@ -264,6 +268,61 @@ app.post('/api/reset-password', async (req, res) => {
     }
 });
 
+// Change Password API
+app.post('/api/change-password', async (req, res) => {
+    console.log("Hit change password");
+    try {
+        console.log("Change Password Request:", req.body); // ✅ DEBUG
+
+        const { username, oldPassword, newPassword } = req.body;
+
+        if (!username || !oldPassword || !newPassword) {
+            return res.status(400).json({
+                success: false,
+                message: 'All fields are required'
+            });
+        }
+
+        if (newPassword.length < 4) {
+            return res.status(400).json({
+                success: false,
+                message: 'Password must be at least 4 characters'
+            });
+        }
+
+        const user = await User.findOne({ username });
+
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: 'User not found'
+            });
+        }
+
+        if (user.password !== oldPassword) {
+            return res.status(401).json({
+                success: false,
+                message: 'Current password is incorrect'
+            });
+        }
+
+        user.password = newPassword;
+        await user.save();
+
+        res.json({
+            success: true,
+            message: 'Password changed successfully!'
+        });
+        console.log(`Password changed successfully for user: ${username}`);
+
+    } catch (err) {
+        console.error('Error changing password:', err);
+        res.status(500).json({
+            success: false,
+            message: 'Server error changing password'
+        });
+    }
+});
 // =============================================================================
 //  SESSION ROUTES
 // =============================================================================
