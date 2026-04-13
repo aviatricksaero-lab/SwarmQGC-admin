@@ -652,12 +652,27 @@ app.get('/api/missions', async (req, res) => {
     }
 });
 
-// DELETE Mission
+// DELETE Mission by ID
 app.delete('/api/missions/:id', async (req, res) => {
     try {
         await Mission.findByIdAndDelete(req.params.id);
         res.json({ success: true, message: 'Mission deleted' });
     } catch (err) {
+        res.status(500).json({ success: false, message: 'Error deleting mission' });
+    }
+});
+
+// DELETE Mission by Name
+app.delete('/api/missions/by-name/:name', async (req, res) => {
+    try {
+        const username = req.query.username; // Optionally filter by user if provided
+        const query = { mission_name: req.params.name };
+        if (username) query.username = username;
+        
+        await Mission.deleteMany(query);
+        res.json({ success: true, message: 'Mission logs deleted' });
+    } catch (err) {
+        console.error('Error deleting mission by name:', err);
         res.status(500).json({ success: false, message: 'Error deleting mission' });
     }
 });

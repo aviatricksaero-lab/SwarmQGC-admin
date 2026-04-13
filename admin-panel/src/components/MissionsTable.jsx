@@ -14,7 +14,8 @@ import {
     Close as CloseIcon,
     Flight as FlightIcon,
     CalendarToday as DateIcon,
-    Person as UserIcon
+    Person as UserIcon,
+    Code as CodeIcon
 } from '@mui/icons-material';
 import axios from 'axios';
 import toast from 'react-hot-toast';
@@ -34,6 +35,7 @@ const MissionsTable = () => {
     
     const [viewMapOpen, setViewMapOpen] = useState(false);
     const [selectedMission, setSelectedMission] = useState(null);
+    const [viewTab, setViewTab] = useState('map'); // 'map' or 'json'
 
     useEffect(() => { fetchMissions(); }, []);
 
@@ -71,6 +73,7 @@ const MissionsTable = () => {
 
     const openMap = (mission) => {
         setSelectedMission(mission);
+        setViewTab('map');
         setViewMapOpen(true);
     };
 
@@ -209,19 +212,45 @@ const MissionsTable = () => {
                             {selectedMission?.mission_name}
                         </Typography>
                     </Box>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, ml: 'auto', mr: 2 }}>
+                        <Button 
+                            variant={viewTab === 'map' ? 'contained' : 'text'}
+                            onClick={() => setViewTab('map')}
+                            startIcon={<MapIcon />}
+                            size="small"
+                        >
+                            Visualize
+                        </Button>
+                        <Button 
+                            variant={viewTab === 'json' ? 'contained' : 'text'}
+                            onClick={() => setViewTab('json')}
+                            startIcon={<CodeIcon />}
+                            size="small"
+                        >
+                            JSON Data
+                        </Button>
+                    </Box>
                     <IconButton onClick={() => setViewMapOpen(false)} sx={{ color: 'text.secondary' }}>
                         <CloseIcon />
                     </IconButton>
                 </DialogTitle>
                 <Divider sx={{ borderColor: 'rgba(255,255,255,0.06)' }} />
-                <DialogContent sx={{ p: 0, height: 500, bgcolor: '#0b0b14', position: 'relative', overflow: 'hidden' }}>
-                    {/* Placeholder for Map Visualization */}
-                    <Box sx={{ 
-                        width: '100%', height: '100%', 
-                        display: 'flex', flexDirection: 'column',
-                        alignItems: 'center', justifyContent: 'center',
-                        color: 'text.secondary', p: 4
-                    }}>
+                <DialogContent sx={{ p: 0, height: 600, bgcolor: '#0b0b14', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+                    {viewTab === 'json' ? (
+                        <Box sx={{ p: 2, overflow: 'auto', flex: 1, fontFamily: 'monospace', fontSize: '0.8rem' }}>
+                            <pre style={{ color: '#8B5CF6', margin: 0, padding: 15, background: 'rgba(0,0,0,0.3)', borderRadius: 8 }}>
+                                {JSON.stringify(selectedMission?.plan_data, null, 2)}
+                            </pre>
+                        </Box>
+                    ) : (
+                        /* Placeholder for Map Visualization */
+                        <Box sx={{ 
+                            width: '100%', height: '100%', 
+                            display: 'flex', flexDirection: 'column',
+                            alignItems: 'center', justifyContent: 'center',
+                            color: 'text.secondary', p: 4,
+                            flex: 1
+                        }}>
                         <Typography variant="body2" sx={{ mb: 2 }}>
                             Geometry: {selectedMission?.geometry?.type} with {selectedMission?.geometry?.coordinates?.length || 0} waypoints
                         </Typography>
@@ -288,6 +317,7 @@ const MissionsTable = () => {
                             <Typography variant="body2">No geometry data available for this mission.</Typography>
                         )}
                     </Box>
+                )}
                 </DialogContent>
             </Dialog>
         </Box>
