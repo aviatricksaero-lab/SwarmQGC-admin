@@ -19,6 +19,7 @@ import {
 } from '@mui/icons-material';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import MissionMap from './MissionMap';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -243,81 +244,16 @@ const MissionsTable = () => {
                             </pre>
                         </Box>
                     ) : (
-                        /* Placeholder for Map Visualization */
-                        <Box sx={{ 
-                            width: '100%', height: '100%', 
-                            display: 'flex', flexDirection: 'column',
-                            alignItems: 'center', justifyContent: 'center',
-                            color: 'text.secondary', p: 4,
-                            flex: 1
-                        }}>
-                        <Typography variant="body2" sx={{ mb: 2 }}>
-                            Geometry: {selectedMission?.geometry?.type} with {selectedMission?.geometry?.coordinates?.length || 0} waypoints
-                        </Typography>
-                        
-                        {/* Improved SVG Path Preview */}
-                        {selectedMission?.geometry?.coordinates?.length > 0 ? (
-                            <Box sx={{ 
-                                width: '100%', height: '100%', 
-                                position: 'relative',
-                                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                p: 2
-                            }}>
-                                <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
-                                    {(() => {
-                                        const coords = selectedMission.geometry.coordinates;
-                                        if (!coords || coords.length === 0) return null;
-
-                                        // Find min/max for normalization
-                                        let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
-                                        coords.forEach(c => {
-                                            const x = c[0]; // lon
-                                            const y = c[1]; // lat
-                                            if (x < minX) minX = x; if (x > maxX) maxX = x;
-                                            if (y < minY) minY = y; if (y > maxY) maxY = y;
-                                        });
-
-                                        const rangeX = maxX - minX || 0.0001;
-                                        const rangeY = maxY - minY || 0.0001;
-
-                                        // Map coordinates to 5-95 range to give some padding
-                                        const points = coords.map(c => {
-                                            const px = 5 + ((c[0] - minX) / rangeX) * 90;
-                                            const py = 95 - ((c[1] - minY) / rangeY) * 90; // Invert Y for screen coords
-                                            return `${px},${py}`;
-                                        }).join(' ');
-
-                                        return (
-                                            <>
-                                                <polyline 
-                                                    points={points}
-                                                    fill="none"
-                                                    stroke="#8B5CF6"
-                                                    strokeWidth="1.5"
-                                                    strokeLinejoin="round"
-                                                    strokeLinecap="round"
-                                                />
-                                                {/* Start Point */}
-                                                <circle cx={5 + ((coords[0][0] - minX) / rangeX) * 90} cy={95 - ((coords[0][1] - minY) / rangeY) * 90} r="2" fill="#10B981" />
-                                                {/* End Point */}
-                                                <circle cx={5 + ((coords[coords.length-1][0] - minX) / rangeX) * 90} cy={95 - ((coords[coords.length-1][1] - minY) / rangeY) * 90} r="2" fill="#EF4444" />
-                                            </>
-                                        );
-                                    })()}
-                                </svg>
-                                <Box sx={{ position: 'absolute', top: 10, left: 10, display: 'flex', gap: 1 }}>
-                                    <Chip label="Start" size="small" sx={{ bgcolor: alpha('#10B981', 0.2), color: '#10B981', fontSize: '0.6rem', height: 18 }} />
-                                    <Chip label="End" size="small" sx={{ bgcolor: alpha('#EF4444', 0.2), color: '#EF4444', fontSize: '0.6rem', height: 18 }} />
+                        <Box sx={{ width: '100%', height: '100%', flex: 1 }}>
+                            {selectedMission?.geometry ? (
+                                <MissionMap geometry={selectedMission.geometry} />
+                            ) : (
+                                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: 'text.secondary' }}>
+                                    <Typography>No geometry data available</Typography>
                                 </Box>
-                                <Typography variant="caption" sx={{ position: 'absolute', bottom: 10, bgcolor: 'rgba(0,0,0,0.6)', px: 1.5, py: 0.5, borderRadius: 1, color: 'white' }}>
-                                    Scaled Flight Path Geometry
-                                </Typography>
-                            </Box>
-                        ) : (
-                            <Typography variant="body2">No geometry data available for this mission.</Typography>
-                        )}
-                    </Box>
-                )}
+                            )}
+                        </Box>
+                    )}
                 </DialogContent>
             </Dialog>
         </Box>

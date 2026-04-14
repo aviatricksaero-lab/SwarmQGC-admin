@@ -642,10 +642,12 @@ app.post('/api/missions', async (req, res) => {
     }
 });
 
-// GET All Missions (Admin Panel)
+// GET Missions (with optional username filter)
 app.get('/api/missions', async (req, res) => {
     try {
-        const missions = await Mission.find().sort({ created_at: -1 });
+        const username = req.query.username;
+        const query = username ? { username: username } : {};
+        const missions = await Mission.find(query).sort({ date: -1 });
         res.json(missions);
     } catch (err) {
         res.status(500).json({ success: false, message: 'Error fetching missions' });
