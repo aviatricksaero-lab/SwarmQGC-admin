@@ -28,19 +28,26 @@ const transporter = nodemailer.createTransport({
 const otpStore = {};
 
 // Middleware
-app.use(cors());
+app.use(cors({
+    origin: [
+        'https://qgc-backend.vercel.app', 
+        'http://localhost:5173', 
+        'http://localhost:3000',
+        'http://localhost:3001'
+    ],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(bodyParser.json());
 
 // Request Logging
-const fs = require('fs');
 app.use((req, res, next) => {
     const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
-    const logMsg = `${new Date().toISOString()} - ${req.method} ${req.url} [IP: ${ip}]\n`;
-    fs.appendFileSync('requests.log', logMsg);
+    const logMsg = `${new Date().toISOString()} - ${req.method} ${req.url} [IP: ${ip}]`;
+    console.log(logMsg);
     if (req.method === 'POST' || req.method === 'PUT') {
-        fs.appendFileSync('requests.log', `Body: ${JSON.stringify(req.body)}\n`);
+        console.log(`Body: ${JSON.stringify(req.body)}`);
     }
-    console.log(logMsg.trim());
     next();
 });
 
