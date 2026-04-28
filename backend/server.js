@@ -221,7 +221,7 @@ app.get('/api/users/:id', async (req, res) => {
         const user = await User.findById(req.params.id);
         if (!user) return res.status(404).json({ success: false, message: 'User not found' });
         res.json(user);
-    } catch (err) {
+    } catch (err) { 
         res.status(500).json({ success: false, message: 'Error fetching user' });
     }
 });
