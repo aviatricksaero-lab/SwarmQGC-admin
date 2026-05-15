@@ -42,7 +42,7 @@ import { Toaster } from 'react-hot-toast';
 import UsersTable from './components/UsersTable';
 import SessionsTable from './components/SessionsTable';
 import FeedbackList from './components/FeedbackList';
-import DashboardStats from './components/DashboardStats';
+import SwarmDashboard from './components/DashboardStats';
 import AirspaceManager from './components/AirspaceManager';
 import ActivityTable from './components/ActivityTable';
 import MissionsTable from './components/MissionsTable';
@@ -125,13 +125,12 @@ const darkTheme = createTheme({
 });
 
 const menuItems = [
-    { text: 'Dashboard', icon: <DashboardIcon />, path: '/', color: '#7C3AED' },
-    { text: 'Users', icon: <PeopleIcon />, path: '/users', color: '#06B6D4' },
-    { text: 'Sessions', icon: <FlightIcon />, path: '/sessions', color: '#10B981' },
-    { text: 'Missions', icon: <MapIcon />, path: '/missions', color: '#8B5CF6' },
-    { text: 'Feedback', icon: <FeedbackIcon />, path: '/feedback', color: '#F59E0B' },
-    { text: 'Airspace', icon: <MapIcon />, path: '/airspace', color: '#EF4444' },
-    { text: 'Activity', icon: <HistoryIcon />, path: '/activity', color: '#EC4899' },
+    { text: 'Swarm Dashboard', icon: <DashboardIcon />, path: '/', color: '#8B5CF6' },
+    { text: 'Drone Fleet', icon: <FlightIcon />, path: '/fleet', color: '#06B6D4' },
+    { text: 'Formation Control', icon: <MapIcon />, path: '/formations', color: '#10B981' },
+    { text: 'Mission History', icon: <HistoryIcon />, path: '/activity', color: '#EC4899' },
+    { text: 'Airspace Monitor', icon: <MapIcon />, path: '/airspace', color: '#EF4444' },
+    { text: 'Pilot Management', icon: <PeopleIcon />, path: '/users', color: '#F59E0B' },
 ];
 
 function Navigation({ children }) {
@@ -184,15 +183,15 @@ function Navigation({ children }) {
                         flexShrink: 0,
                         boxShadow: '0 4px 15px rgba(124, 58, 237, 0.4)',
                     }}>
-                        <ShieldIcon sx={{ color: 'white', fontSize: 20 }} />
+                        <RadarIcon sx={{ color: 'white', fontSize: 20 }} />
                     </Box>
                     {!collapsed && (
                         <Box>
                             <Typography variant="subtitle1" sx={{ color: 'white', fontWeight: 800, lineHeight: 1.1, fontSize: '0.95rem' }}>
-                                Main QGC
+                                SwarmQGC
                             </Typography>
                             <Typography variant="caption" sx={{ color: 'primary.main', fontWeight: 700, fontSize: '0.65rem', letterSpacing: '0.05em' }}>
-                                AGRI-MAPPING-CAMERA
+                                SWARM CONTROL CENTER
                             </Typography>
                         </Box>
                     )}
@@ -346,10 +345,10 @@ function Navigation({ children }) {
                     <Toolbar sx={{ gap: 1 }}>
                         <Box sx={{ flex: 1 }}>
                             <Typography variant="h6" sx={{ fontWeight: 700, color: 'white', fontSize: '1rem' }}>
-                                Main QGC Admin Dashboard
+                                SwarmQGC Command Center
                             </Typography>
                             <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 500 }}>
-                                Agri-Mapping-Camera Management System
+                                Multi-Drone Coordination & Telemetry
                             </Typography>
                         </Box>
                         <Chip
@@ -401,13 +400,12 @@ function App() {
                 />
                 <Navigation>
                     <Routes>
-                        <Route path="/" element={<DashboardStats />} />
-                        <Route path="/users" element={<UsersTable />} />
-                        <Route path="/sessions" element={<SessionsTable />} />
-                        <Route path="/missions" element={<MissionsTable />} />
-                        <Route path="/feedback" element={<FeedbackList />} />
-                        <Route path="/airspace" element={<AirspaceManager />} />
+                        <Route path="/" element={<SwarmDashboard />} />
+                        <Route path="/fleet" element={<SessionsTable />} />
+                        <Route path="/formations" element={<MissionsTable />} />
                         <Route path="/activity" element={<ActivityTable />} />
+                        <Route path="/airspace" element={<AirspaceManager />} />
+                        <Route path="/users" element={<UsersTable />} />
                     </Routes>
                 </Navigation>
             </Router>

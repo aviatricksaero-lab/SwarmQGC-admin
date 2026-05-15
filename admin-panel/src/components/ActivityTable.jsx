@@ -80,10 +80,10 @@ const ActivityTable = () => {
                         </Box>
                         <Box>
                             <Typography variant="h6" sx={{ fontWeight: 700, color: 'white' }}>
-                                User Activity Log
+                                Swarm Mission History
                             </Typography>
                             <Typography variant="caption" sx={{ color: 'text.secondary' }}>
-                                Tracking system access and vehicle arming events
+                                Tracking multi-drone flight logs and operational events
                             </Typography>
                         </Box>
                     </Box>

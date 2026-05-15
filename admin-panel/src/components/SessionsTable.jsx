@@ -84,9 +84,9 @@ const SessionsTable = () => {
                 {/* Header */}
                 <Box sx={{ p: 3, display: 'flex', alignItems: 'center', gap: 2, flexWrap: 'wrap', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
                     <Box sx={{ flex: 1 }}>
-                        <Typography variant="h6" sx={{ fontWeight: 700, color: 'white' }}>Flight & Connection Sessions</Typography>
+                        <Typography variant="h6" sx={{ fontWeight: 700, color: 'white' }}>Drone Fleet Deployment Log</Typography>
                         <Typography variant="caption" sx={{ color: 'text.secondary' }}>
-                            {filtered.length} total sessions tracked
+                            {filtered.length} total drone deployments tracked
                         </Typography>
                     </Box>
                     <TextField
