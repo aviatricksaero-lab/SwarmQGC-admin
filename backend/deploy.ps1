@@ -4,7 +4,7 @@
 
 $PROJECT_ID="qgc-100"
 $REGION="asia-south1"
-$SERVICE_NAME="qgc-backend"
+$SERVICE_NAME="qgc-swarm"
 
 # Ensure the project is set
 Write-Host "Setting project to $PROJECT_ID..." -ForegroundColor Cyan
@@ -20,7 +20,7 @@ gcloud run deploy $SERVICE_NAME `
   --region $REGION `
   --platform managed `
   --allow-unauthenticated `
-  --set-env-vars "MONGO_URI=mongodb+srv://QGC:QGC123@qgc.11dm4bi.mongodb.net/qgc_db?appName=QGC,EMAIL_USER=aviatricksaerolab@gmail.com,EMAIL_PASS=yxdi hbic fmip rcku"
+  --set-env-vars "MONGO_URI=mongodb+srv://SwarmQGC:Aviatricks123@swarmqgc.dtsxbta.mongodb.net/?appName=SwarmQGC,EMAIL_USER=aviatricksaerolab@gmail.com,EMAIL_PASS=yxdi hbic fmip rcku"
 
 if ($LASTEXITCODE -eq 0) {
     Write-Host "`nSuccessfully deployed QGC Backend!" -ForegroundColor Green
