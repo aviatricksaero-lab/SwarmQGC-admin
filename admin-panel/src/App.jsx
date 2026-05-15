@@ -32,7 +32,8 @@ import {
     Notifications as NotificationsIcon,
     Brightness4 as DarkIcon,
     Shield as ShieldIcon,
-    History as HistoryIcon
+    History as HistoryIcon,
+    Radar as RadarIcon
 } from '@mui/icons-material';
 import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
